@@ -13,7 +13,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Column(
         children: [
-          Image.asset("lib/assets/images/shopping_cart.png"),
+          Image.asset("assets/images/shopping_cart.png"),
         ],
       ),
     );
