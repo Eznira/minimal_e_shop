@@ -3,14 +3,25 @@ import 'package:flutter/cupertino.dart';
 import 'shoe_model.dart';
 
 class ShoeData extends ChangeNotifier {
-  late final show_list = [shoe1, shoe2, shoe3, shoe4];
+  late final shoe_list = [shoe1, shoe2, shoe3, shoe4];
 
   final cart_list = [];
 
+  void addShoeToCart(Shoe shoe) {
+    if (!cart_list.contains(shoe)) {
+      cart_list.add(shoe);
+      notifyListeners();
+    } else
+      throw AlreadyInCart("This item already exist in cart!");
+  }
 
+  void removeShoeFromCart(Shoe shoe) {
+    cart_list.remove(shoe);
+    notifyListeners();
+  }
 
   final shoe1 = Shoe(
-    name: "Classic Leather Sneakers",
+    name: "Classic Sneakers",
     description:
         "Timeless leather sneakers with a comfortable fit. Perfect for casual wear, offering a blend of style and durability.",
     rating: 4.7,
@@ -63,3 +74,13 @@ class ShoeData extends ChangeNotifier {
   );
 }
 
+class AlreadyInCart implements Exception {
+  final String message;
+
+  AlreadyInCart(this.message);
+
+  @override
+  String toString() {
+    return "AlreadyInCart: $message";
+  }
+}

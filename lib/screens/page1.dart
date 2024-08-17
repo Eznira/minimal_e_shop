@@ -3,10 +3,42 @@ import 'package:minimal_e_shop/models/shoe_data.dart';
 import 'package:provider/provider.dart';
 
 import '../models/shoe_model.dart';
-import '../utils/shoe_tile.dart';
+import '../utils/shoe_card.dart';
 
-class Page1 extends StatelessWidget {
+class Page1 extends StatefulWidget {
   Page1({super.key});
+
+  @override
+  State<Page1> createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
+  void addShoeToCart(Shoe shoe) {
+    try {
+      context.read<ShoeData>().addShoeToCart(shoe);
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Successfully added"),
+          content: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50.0),
+            child: Text("Check your cart!"),
+          ),
+        ),
+      );
+    } on AlreadyInCart {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Already in cart"),
+          content: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50.0),
+            child: Text("Check your cart!"),
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +93,10 @@ class Page1 extends StatelessWidget {
                 itemCount: 4,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
-                  Shoe currentShoe = value.show_list[index];
-                  return ShowTile(
+                  Shoe currentShoe = value.shoe_list[index];
+                  return ShoeCard(
                     shoe: currentShoe,
+                    ontap: () => addShoeToCart(currentShoe),
                   );
                 },
               ),
