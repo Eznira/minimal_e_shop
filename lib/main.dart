@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:minimal_e_shop/screens/intro.dart';
+import 'package:provider/provider.dart';
 
-import 'screens/home.dart';
+import 'models/shoe_data.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+        create: (context) => ShoeData(), child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,11 +19,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: IntroPage(),
     );
   }
 }
