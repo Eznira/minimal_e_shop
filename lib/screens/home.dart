@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:minimal_e_shop/screens/page1.dart';
 import 'package:minimal_e_shop/screens/page2.dart';
 import 'package:minimal_e_shop/utils/custom_nav_bar.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  MyHomePage({super.key, this.index = 0});
+
+  final int index;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -18,6 +21,24 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       selectedIndex = index;
     });
+  }
+
+  void goToHome() {
+    Navigator.pushNamed(context, '/home');
+  }
+
+  void goToCart() {
+    Navigator.pushNamed(context, '/cart');
+  }
+
+  void exitApp() {
+    SystemNavigator.pop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    navigatePage(widget.index);
   }
 
   @override
@@ -44,31 +65,38 @@ class _MyHomePageState extends State<MyHomePage> {
               'assets/images/nike_logo.png',
               color: Colors.white,
             )),
-            const Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                child: ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      'Home',
-                      style: TextStyle(color: Colors.white),
-                    ))),
-            const Padding(
+                child: Builder(builder: (context) {
+                  return ListTile(
+                      onTap: goToHome,
+                      leading: Icon(
+                        Icons.home,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        'Home',
+                        style: TextStyle(color: Colors.white),
+                      ));
+                })),
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-              child: ListTile(
-                leading: Icon(
-                  Icons.card_travel,
-                  color: Colors.white,
-                ),
-                title: Text('Cart', style: TextStyle(color: Colors.white)),
-              ),
+              child: Builder(builder: (context) {
+                return ListTile(
+                  onTap: goToCart,
+                  leading: Icon(
+                    Icons.card_travel,
+                    color: Colors.white,
+                  ),
+                  title: Text('Cart', style: TextStyle(color: Colors.white)),
+                );
+              }),
             ),
             const Spacer(),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               child: ListTile(
+                onTap: exitApp,
                 leading: Icon(
                   Icons.exit_to_app,
                   color: Colors.white,

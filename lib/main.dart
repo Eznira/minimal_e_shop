@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minimal_e_shop/screens/home.dart';
 import 'package:minimal_e_shop/screens/intro.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: IntroPage(),
+      routes: {
+        "/home": (context) => MyHomePage(),
+        "/shop": (context) => MyHomePage(),
+        "/cart": (context) => MyHomePage(
+              index: 1
+            ),
+      },
     );
   }
 }

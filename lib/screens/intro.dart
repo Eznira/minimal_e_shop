@@ -7,7 +7,7 @@ class IntroPage extends StatelessWidget {
   void ontap(BuildContext context) => Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const MyHomePage(),
+        builder: (context) => MyHomePage(),
       ));
   @override
   Widget build(BuildContext context) {
