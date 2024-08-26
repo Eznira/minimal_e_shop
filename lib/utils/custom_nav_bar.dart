@@ -25,7 +25,7 @@ class CustomNavBar extends StatelessWidget {
               text: 'Shop',
             ),
             GButton(
-              icon: Icons.card_travel,
+              icon: Icons.shopping_cart,
               text: 'Cart',
             ),
           ],

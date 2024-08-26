@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 return ListTile(
                   onTap: goToCart,
                   leading: Icon(
-                    Icons.card_travel,
+                    Icons.shopping_cart,
                     color: Colors.white,
                   ),
                   title: Text('Cart', style: TextStyle(color: Colors.white)),

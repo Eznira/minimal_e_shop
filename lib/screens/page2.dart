@@ -29,16 +29,20 @@ class _Page2State extends State<Page2> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: value.cart_list.length,
-                  itemBuilder: (context, index) {
-                    Shoe shoe = value.cart_list[index];
-                    return ShoeTile(
-                      shoe: shoe,
-                      onPressed: () => removeShoe(shoe),
-                    );
-                  },
-                ),
+                child: value.cart_list.isEmpty
+                    ? Center(
+                        child: Text("Empyt Cart!"),
+                      )
+                    : ListView.builder(
+                        itemCount: value.cart_list.length,
+                        itemBuilder: (context, index) {
+                          Shoe shoe = value.cart_list[index];
+                          return ShoeTile(
+                            shoe: shoe,
+                            onPressed: () => removeShoe(shoe),
+                          );
+                        },
+                      ),
               )
             ],
           )),
